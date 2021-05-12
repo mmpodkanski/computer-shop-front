@@ -1,0 +1,19 @@
+.center {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.container-fluid {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.col-md-4 {
+    padding-top: 3%;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
