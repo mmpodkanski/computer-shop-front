@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/_services/product.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ChildActivationStart, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -13,8 +13,10 @@ export class ProductListComponent implements OnInit {
   
   page: any = 0;
   searching_name: string;
-  products: Product[] = [];
+  products: Product[] = null;
+  count: number = 0;
 
+  
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -22,21 +24,30 @@ export class ProductListComponent implements OnInit {
     ) {
       this.router.routeReuseStrategy.shouldReuseRoute = function () {
         return false;
-    };
+      };
+
      }
 
   ngOnInit(): void {
-    this.getParam();
-    this.retrieveProducts(this.page);
-    if (this.searching_name.length > 0) {
-      this.retrieveProductsByName(this.searching_name);
-    }
+    this.initRetrevingProducts();
+    console.log(this.searching_name);
   }
+
+initRetrevingProducts (): void {
+    this.getParam();
+    if (this.searching_name != undefined) {
+      this.retrieveProductsByName(this.searching_name);
+    } else {
+      this.retrieveProducts(this.page);
+    }
+}
+
   retrieveProductsByName(searching_name: string) {
     this.productService.getProductsByName(searching_name)
       .subscribe(
         data => {
           this.products = data;
+          this.count = data.length;
       });
   }
 
@@ -45,6 +56,7 @@ export class ProductListComponent implements OnInit {
       .subscribe(
         data => {
           this.products = data;
+          this.count = data.length;
       });
   }
 

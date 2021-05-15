@@ -10,17 +10,22 @@ margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
+
+      
+
+html { height: 100%; }
+
 body {
-  background-color: #ffffffcb;
-  }
+    min-height:100%; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    position:relative; 
+    padding-bottom:70px; 
+    background-color: #ffffffcb;
+}
 
-
-html, body { height: 100%; }
-
-/* html, body { height: 100%; background-color: rgba(196, 188, 188, 0.822); } */
-body { margin: 0; font-family: "Lato", sans-serif; }
-
-      
-      
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+footer { 
+    position: absolute; 
+    left: 0 ; right: 0; bottom: 0; 
+    height: 70px;
+    background: black;
+}

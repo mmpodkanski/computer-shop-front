@@ -1,0 +1,27 @@
+<div class="container-fluid center text-center" style="padding-top: 10%;">
+    <div class="row center">
+        <div class="col-md-5 border border-dark">Produkt</div>
+        <div class="col-md-4 border border-dark">Cena za 1 szt</div>
+        <div class="col-md-2 border border-dark">Ilość</div>
+        
+    </div>
+
+    <div *ngIf="listItems.length == 0" style="padding-top: 10px;">
+        <h1>Dodaj coś do koszyka!</h1>
+    </div>
+
+    <div class="row center" style="padding: 0;" *ngFor="let c of listItems">
+        <div class="col-md-5 border border-dark" >{{c.product.name}}</div>
+        <div class="col-md-4 border border-dark">{{c.product.price}} zł</div>
+        <div class="col-md-2 border border-dark">{{c.quantity}}</div>
+        <div class="col-auto"> 
+            <a (click)="removeProductFromCart(c.id)" style="cursor: pointer;"><mat-icon>delete_forever</mat-icon></a>
+        </div>
+    </div>
+
+    
+
+    <div style="padding-top: 5%;">
+        <button (click)="createOrder()" type="button" class="btn btn-success">Złóż zamówienie</button>
+    </div>
+</div>
