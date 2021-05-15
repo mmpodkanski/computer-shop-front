@@ -10,18 +10,34 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
 
+  
   page: any = 0;
+  searching_name: string;
   products: Product[] = [];
 
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router
-    ) { }
+    ) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+    };
+     }
 
   ngOnInit(): void {
     this.getParam();
     this.retrieveProducts(this.page);
+    if (this.searching_name.length > 0) {
+      this.retrieveProductsByName(this.searching_name);
+    }
+  }
+  retrieveProductsByName(searching_name: string) {
+    this.productService.getProductsByName(searching_name)
+      .subscribe(
+        data => {
+          this.products = data;
+      });
   }
 
   retrieveProducts(page: any): void {
@@ -32,18 +48,26 @@ export class ProductListComponent implements OnInit {
       });
   }
 
+  previousPage(): void {
+    let previousPage = this.page-1;
+    this.router.navigate(['/products'], {queryParams: {page: previousPage}});
+  }
+
+  nextPage(): void {
+    let nextPage = this.page+1;
+    this.router.navigate(['/products'], {queryParams: {page: nextPage}});
+  }
+
   getParam(): void {
-    let param = null;
 
     this.route.queryParams
       .subscribe(params => {
-        param = params.page;
-      }
-    );
-
-    if (param != null){
-      this.page = param;
-      console.log(this.page);
-    }
+        if (params.page != undefined && params.page != null) {
+          this.page = parseInt(params.page);
+        }
+        if (params.search != undefined && params.search != null) {
+          this.searching_name = params.search;
+        }
+    });
   }
 }

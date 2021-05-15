@@ -16,14 +16,15 @@ export class ProductService {
   getSortedProducts(page: any): Observable<Product[]> {
   return this.http.get<Product[]>(`${baseUrl}?page=${page}`);
   }
-
-  getProductsByCategory(category: string): Observable<Product> {
-    return this.http.get<Product>(`${baseUrl}?category=${category}`);
+  
+  getProductsByName(name: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${baseUrl}?name=${name}`);
   }
 
-  getProductsByCode(code: string): Observable<Product> {
-    return this.http.get<Product>(`${baseUrl}?code=${code}`);
+  getProductsByCategory(category: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${baseUrl}?category=${category}`);
   }
+
 
   getProductById(id: any): Observable<Product> {
     return this.http.get<Product>(`${baseUrl}/${id}`);

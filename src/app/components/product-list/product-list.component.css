@@ -12,8 +12,25 @@
     padding-top: 3%;
 }
 
+.product_img {
+    height: 256px;
+    width: 256px;
+}
+
 .wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a{
+    color: black;
+}
+
+a:hover  {
+    color: gray;
+}
