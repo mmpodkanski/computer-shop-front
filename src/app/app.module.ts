@@ -18,6 +18,11 @@ import { ServerErrorInterceptor } from './_helpers/error.interceptor';
 import { GlobalErrorHandler } from './_services/global-error-handler.service';
 import { FormsModule } from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
+import { CustomerBoardComponent } from './components/customer-board/customer-board.component';
+import { OrderViewComponent } from './components/order-view/order-view.component';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+import { ProductAddComponent } from './components/product-add/product-add.component';
 
 
 
@@ -30,7 +35,12 @@ import { CartComponent } from './components/cart/cart.component';
     NotFoundComponent,
     LoginComponent,
     RegisterComponent,
-    CartComponent
+    CartComponent,
+    CustomerBoardComponent,
+    OrderViewComponent,
+    PaymentSuccessComponent,
+    PaymentFailedComponent,
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,

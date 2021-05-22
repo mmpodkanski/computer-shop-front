@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseurl: "http://localhost:8080/"
+  baseurl: "http://localhost:8080/",
+  STRIPE_PUBLISHABLE_KEY: "pk_test_51IpCa4DpnYbYT8GURuvrndIfvec8ycNMqJJDRX4sBvpFtUgmbRmejO7R7PZHGuH9kKXpkksUulyib4mMJxejY5O300apqEZCEE"
+
 };
 
 /*

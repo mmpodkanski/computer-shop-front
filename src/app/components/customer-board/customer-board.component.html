@@ -1,0 +1,183 @@
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-6" style="padding: 100px 0;">
+            <h1>Zamówienia</h1>
+            <div *ngIf="orders.length > 0">
+                <div class="row border border-bottom-0 border-dark" style="padding-top: 20px;">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">Status</div>
+                            <div class="col-4 border-end border-start border-dark">Całkowity koszt</div>
+                            <div class="col-4">Akcja</div>
+                        </div>
+                    </div>
+                    <div class="col-12" style="padding-top: 25px">
+                        <div class="row border border-dark" *ngFor="let o of orders" style="padding: 25px 0;">
+                            <div class="col-4 align-self-center" ><b>{{o.status}}</b></div>
+                            <div class="col-4 border-end border-start border-dark align-self-center" ><i>{{o.totalCost}} zł</i></div>
+                            <div *ngIf="o.status =='PENDING'" class="btn-group" class="col-4 align-self-center" role="group" >
+                                <button type="button" class="btn btn-success mr-1" (click)="processOrder(o.id)" >Opłać</button>
+                                <button type="button" class="btn btn-danger" (click)="cancelOrder(o.id)">Anuluj</button>
+                            </div>
+                            <div *ngIf="o.status == 'PAID'"  class="col-4 align-self-center" >
+                                <button type="button" class="btn btn-info" (click)="processOrder(o.id)" >Szczegóły</button>
+                            </div>
+                            <div *ngIf="o.status == 'FAILED'"  class="col-4 align-self-center" >
+                                <button type="button" class="btn btn-success" (click)="processOrder(o.id)" >Spróbuj ponownie</button>
+                            </div>
+                            <div *ngIf="o.status == 'CANCELLED'"  class="col-4 align-self-center" >
+                                X
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div *ngIf="orders.length == 0">
+                <div class="col-md-12">
+                    <h2>brak zamówień!</h2>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6" style="padding: 100px 0;">
+            <h1>Dane do wysyłki</h1>
+            <div class="col-md-12" style="padding-top: 30px;">
+                <form class="center"  *ngIf="!detailsAreAdded" name="form" (ngSubmit)="f.form.valid && updateDetails()" #f="ngForm" novalidate>
+
+
+                    <div class="form-row center">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label">Imię</label>
+                                <input type="text" name="firstName" class="form-control" [(ngModel)]="newDetails.firstName" required
+                                #firstName="ngModel">
+                                <div class="alert alert-danger" role="alert" *ngIf="firstName.errors && f.submitted">
+                                    <div *ngIf="firstName.errors.required">Imię jest wymagane!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">Nazwisko</label>
+                                <input type="text" name="lastName" class="form-control" [(ngModel)]="newDetails.lastName" required
+                                #lastName="ngModel">
+                                <div class="alert alert-danger" role="alert" *ngIf="lastName.errors && f.submitted">
+                                    <div *ngIf="lastName.errors.required">Nazwisko jest wymagane!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row center">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="country" class="form-label">Państwo</label>
+                                <input type="text" name="country" class="form-control" [(ngModel)]="newDetails.country" required
+                                #country="ngModel">
+                                <div class="alert alert-danger" role="alert" *ngIf="country.errors && f.submitted">
+                                    <div *ngIf="country.errors.required">Państwo jest wymagane!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="city" class="form-label">Miasto</label>
+                                <input type="text" name="city" class="form-control" [(ngModel)]="newDetails.city" required
+                                #city="ngModel">
+                                <div class="alert alert-danger" role="alert" *ngIf="city.errors && f.submitted">
+                                    <div *ngIf="city.errors.required">Miasto jest wymagane!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    
+
+                    <div class="form-row center">
+                        <div class="col-8">
+                            <div class="mb-3">
+                                <label for="addressLine1" class="form-label">Adres</label>
+                                <input type="text" name="addressLine1" class="form-control" [(ngModel)]="newDetails.addressLine1" required
+                                #addressLine1="ngModel">
+                                <div class="alert alert-danger" role="alert" *ngIf="addressLine1.errors && f.submitted">
+                                    <div *ngIf="addressLine1.errors.required">Adres jest wymagany!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="addressLine2" class="form-label">numer domu</label>
+                                <input type="text" name="addressLine2" class="form-control" [(ngModel)]="newDetails.addressLine2" required
+                                #addressLine2="ngModel">
+                                <div class="alert alert-danger" role="alert" *ngIf="addressLine2.errors && f.submitted">
+                                  <div *ngIf="addressLine2.errors.required">Numer mieszkania/domu jest wymagany!</div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row center">
+                        <div class="col-8">
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Telefon</label>
+                                <input type="text" name="phone" class="form-control" [(ngModel)]="newDetails.phone" required minlength="9"
+                                #phone="ngModel" >
+                                <div class="alert alert-danger" role="alert" *ngIf="phone.errors && f.submitted">
+                                  <div *ngIf="phone.errors.required">Numer telefonu jest wymagany</div>
+                                  <div *ngIf="phone.errors.minlength">
+                                      Numer telefonu musi mieć conajmniej 9 znaków !
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="inputState">Płeć</label>
+                                <select name="gender" [(ngModel)]="newDetails.gender" id="inputState" #gender="ngModel" class="form-control shadow-sm" required>
+                                  <option value="MAN">Mężczyzna</option>
+                                  <option value="WOMEN">Kobieta</option>
+                                  <option value="OTHER">Inna</option>
+                                </select>
+                                <div class="alert alert-danger" role="alert" *ngIf="gender.errors && f.submitted">
+                                    <div *ngIf="gender.errors.required">Proszę wybrać płeć!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <div  class="form-text">Nikomu innemu nie udostępniamy Twoich informacji.</div>
+
+                    <div>
+                    <button type="submit" class="btn btn-primary" >Zapisz</button>
+                        <div class="mb-3 center_div_form" >
+                            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isUpdateFailed">
+                            Logowanie nieudane: {{ errorMessage }}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div *ngIf="detailsAreAdded" class="">
+                    <p>Państwo: {{details.country}}</p>
+                    <p>Miasto: {{details.city}}</p>
+                    <p>Adres: {{details.addressLine1}}</p>
+                    <p>Numer mieszkania/domu: {{details.addressLine2}}</p>
+                    <p>Telefon: {{details.phone}}</p>
+                    <p>Płeć: {{details.gender}}</p>
+                    <button type="submit" class="btn btn-primary" (click)="changeStatus()" >Edytuj</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

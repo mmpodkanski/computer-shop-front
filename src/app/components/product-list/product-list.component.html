@@ -3,7 +3,9 @@
     <div class="row">
       <div class="col-md-4" *ngFor="let p of products">
         <div class="product_img center">
-          <img src="https://bulma.io/images/placeholders/256x256.png" style="max-width:100%;height:auto;" alt="sometext">
+          <a [routerLink]="['/products', p.id]">
+            <img src="{{p.imgLogoUrl}}"  alt="imgLogoUrl">
+          </a>
         </div>
         <a [routerLink]="['/products', p.id]">
           <b>{{p.price}} zł</b><br>

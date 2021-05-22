@@ -1,0 +1,9 @@
+.center {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.product_img {
+    height: 150px;
+    width: 150px;
+}

@@ -9,24 +9,24 @@
         </div>
 
         <div class="mb-6" style="padding-top: 20px;">
-            <input type="password" class="form-control" name="hasło" [(ngModel)]="form.password" required minlength="6"
+          <input type="password" class="form-control" name="hasło" [(ngModel)]="form.password" required minlength="6"
           #password="ngModel" placeholder="Hasło"/>
-        <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
-          <div *ngIf="password.errors.required">Hasło jest wymagane</div>
-          <div *ngIf="password.errors.minlength">
-            Hasło musi mieć przynajmniej 6 znaków
+          <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors.required">Hasło jest wymagane</div>
+            <div *ngIf="password.errors.minlength">
+              Hasło musi mieć przynajmniej 6 znaków
+            </div>
           </div>
-        </div>
         </div>
 
         <div style="padding-top: 20px;">
             <button class="btn btn-primary btn-block"> Login </button>
         </div>
         <div class="mb-3 center_div_form">
-            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
-              Logowanie nieudane: {{ errorMessage }}
-            </div>
+          <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+            Logowanie nieudane: {{ errorMessage }}
           </div>
+        </div>
     </form>
 
     <div class="alert alert-success" *ngIf="isLoggedIn">

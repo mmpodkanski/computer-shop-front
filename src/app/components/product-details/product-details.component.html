@@ -1,18 +1,24 @@
-    
+    <div *ngIf="!currentProduct" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
 <div *ngIf="currentProduct" class="container" style="margin: 10px auto;">
   <button [routerLink]="['/products']" type="button" class="btn btn-outline-dark">Cofnij</button>
   <div class="text-center">
     <h1><b>{{currentProduct.name}}</b></h1>
+    <p><i>Stan: {{currentProduct.condition}}</i></p> 
+
   </div>
   <div class="row align-items-center centerr">
-    <div class="align-self-center col-md-6">
-        <img class="product_img" src="https://zgsklep.pl/pol_pl_Mokibo-Smart-Klawiatura-z-Touchpadem-w-klawiszach-czerwony-panel-1242_1.jpg" alt="...">
+    <div class="align-self-center col-md-6" style="padding-top: 50px;">
+        <img class="product_img" src="{{currentProduct.imgLogoUrl}}" alt="...">
     </div>
-    <div class="align-self-center col-md-3 text-break">
-      <p style="padding-bottom: 5px;"><i>Stan: {{currentProduct.condition}}</i></p> 
+    <div class="align-self-center col-md-3 text-break" style="padding-top: 50px;">
       <p>{{currentProduct.description}}</p>
     </div>
-    <div class="align-self-center col-md-3 text-center">
+    <div class="align-self-center col-md-3 text-center" style="padding-top: 50px;">
       <button (click)="addToCart()" type="button" class="btn btn-success">Dodaj do koszyka</button>
       <div class="row quantity">
         <div class="col-md-12">
@@ -22,11 +28,4 @@
     </div>
   </div>
   <p>Kod produktu: {{currentProduct.code}}</p> 
-</div>
-
-
-<div *ngIf="!currentProduct" class="d-flex justify-content-center">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
 </div>

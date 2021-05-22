@@ -1,0 +1,59 @@
+<div *ngIf="!currentOrder" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="currentOrder" class="container text-center" style="margin: 30px auto;">
+    <div class="row">
+        <div class="col-12" style="border-bottom: 2px dashed rgb(8, 8, 31);">
+            <div class="row" style="padding-top: 30px;">
+                <div class="col"></div>
+                <div class="col align-self-center"><h2>Nazwa produktu</h2></div>
+                <div class="col align-self-center"><h2>Ilość</h2></div>
+                <div class="col align-self-center"><h2>Cena</h2></div>
+            </div>
+        </div>
+
+        <div class="col-12" >
+            <div *ngFor="let i of currentOrder.items" class="row no-gutters" style="padding-top: 30px">
+                <div class="col-sm">
+                    <div class="product_img center">
+                        <img src="https://bulma.io/images/placeholders/256x256.png" style="max-width:100%;height:auto;" alt="sometext">
+                        <!-- {{o.product.imgLogoUrl}} -->
+                    </div>
+                </div>
+                <div class="col align-self-center">
+                    <h1>{{i.product.name}}</h1></div>
+                <div class="col align-self-center"><h2>{{i.quantity}}</h2></div>
+                <div class="col align-self-center"><h2><b>{{i.totalCost}} zł</b></h2></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding-top: 100px;">
+        <h1> Całkowity koszt: <b style="color: green;">{{totalCost}} zł</b></h1>
+    </div>
+
+    <div *ngIf="currentOrder.status=='PENDING'">
+        <div style="padding-top: 20PX;">
+            <i>
+                Posiadanie produktów w koszyku nie rezerwuje produktów, nie gwarantujemy, że dany produkt nie został już wyprzedany. <br>
+                Aby mieć pewność, opłać zamówienie tak szybko jak jest to możliwe.
+            </i>
+        </div>
+
+        <div style="padding-top: 20px;">
+            <button type="button" class="btn btn-success btn-lg" (click)="checkout()">Zapłać <i>(przez Stripe)</i></button>
+        </div>
+    </div>
+
+    <div *ngIf="currentOrder.status=='PAID'" style="padding-top: 100px;">
+        <h1><b style="color: green;">OPŁACONE</b></h1>
+
+        
+            Proces dostawy zazwyczaj zajmuje maksymalnie 3 dni robocze, więcej informacji znajdziesz w przesłanym przez nas mailu. <br>
+            W przypadku problemów, prosimy o kontakt: <i>kontakt@kontakt.sklep.com
+        </i>
+    </div>
+</div>

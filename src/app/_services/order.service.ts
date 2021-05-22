@@ -11,10 +11,10 @@ const baseUrl = environment.baseurl + 'orders';
   providedIn: 'root'
 })
 export class OrderService {
-
+  
   constructor(private http: HttpClient) { }
   
-  getAllOrders(id: any): Observable<Order[]> {
+  getAllOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(`${baseUrl}`);
   }
 
@@ -27,8 +27,14 @@ export class OrderService {
   }
 
   createCheckoutList(id: any): Observable<any> { // important response key!
-    return this.http.post<any>(`${baseUrl}/checkout?orderId=${id}}`, id);
+    return this.http.post<any>(`${baseUrl}/checkout?orderId=${id}`, {});
   }
+
+  checkOrder(id: any) {
+    console.log(id);
+    return this.http.patch(`${baseUrl}/check-session?orderId=${id}`, {});
+  }
+
 
   deleteOrder(id: any): Observable<Order> {
     return this.http.delete<Order>(`${baseUrl}/${id}`);

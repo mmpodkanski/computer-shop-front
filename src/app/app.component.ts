@@ -34,7 +34,6 @@ constructor(
   }
 
   searchProduct(): void {
-    console.log(this.search);
     this.router.navigate(['/products'], {queryParams: {search: this.search}});
   }
 
@@ -48,4 +47,5 @@ constructor(
     this.tokenStorageService.signOut();
   }
 
+  
 }

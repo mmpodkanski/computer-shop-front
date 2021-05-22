@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
+import { ProductRequest } from '../models/product-request.model';
 
 const baseUrl = environment.baseurl + 'products';
 
@@ -25,12 +26,11 @@ export class ProductService {
     return this.http.get<Product[]>(`${baseUrl}?category=${category}`);
   }
 
-
   getProductById(id: any): Observable<Product> {
     return this.http.get<Product>(`${baseUrl}/${id}`);
   }
 
-  addProduct(data: any): Observable<any> {
+  addProduct(data: ProductRequest): Observable<any> {
     return this.http.post(`${baseUrl}`, data);
   }
 

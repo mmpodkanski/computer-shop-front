@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartItem } from 'src/app/models/cart-item.model';
 import { Cart } from 'src/app/models/cart.model';
 import { Order } from 'src/app/models/order.model';
@@ -20,7 +21,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
-    private injector: Injector
+    private injector: Injector,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class CartComponent implements OnInit {
     this.orderService.createOrder()
       .subscribe(
         req => {
+          this.router.navigate(['/customer']);
           notifier.showSuccess("Zamówienie zostało złożone!");
         }
       )

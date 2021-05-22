@@ -1,0 +1,120 @@
+<div class="cosntainer center" style="padding-top: 50px;">
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name" class="form-label">Nazwa produktu</label>
+                <input
+                type="text"
+                class="form-control shadow-sm"
+                id="name"
+                required
+                [(ngModel)]="newProduct.name"
+                placeholder="AMD 3600"
+                name="name"
+                />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="code" class="form-label">Kod produktu</label>
+                <input
+                type="code"
+                class="form-control shadow-sm"
+                id="code"
+                required
+                [(ngModel)]="newProduct.code"
+                name="code"
+                />
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-12">
+            <label for="description" class="form-label">Opis</label>
+            <textarea
+            class="form-control shadow-sm"
+            id="description"
+            rows="3"
+            required
+            [(ngModel)]="newProduct.description"
+            name="description"
+            ></textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label for="inputState">Kategoria</label>
+            <select name="category" [(ngModel)]="newProduct.category" id="inputState" class="form-control shadow-sm">
+              <option value="CPU">CPU</option>
+              <option value="GPU">GPU</option>
+              <option value="HDD_DRIVE">Dysk HDD</option>
+              <option value="SSD_DRIVE">Dysk SSD</option>
+              <option value="MOUSE">Myszka</option>
+              <option value="KEYBOARD">Klawiatura</option>
+              <option value="RAM">Ram</option>
+              <option value="MOTHERBOARD">Płyta główna</option>
+              <option value="MONITOR">Monitor</option>
+            </select>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="price" class="form-label">Cena w zł</label>
+                <input
+                type="text"
+                class="form-control shadow-sm"
+                id="price"
+                required
+                [(ngModel)]="newProduct.price"
+                placeholder="12.32"
+                name="price"
+                />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="inputState">Stan</label>
+                <select name="condition" [(ngModel)]="newProduct.condition" id="inputState" class="form-control shadow-sm">
+                <option value="NEW">Nowy</option>
+                <option value="USED">Używany</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="quantity" class="form-label">Ilość produktu</label>
+                <input
+                type="text"
+                class="form-control shadow-sm"
+                id="quantity"
+                required
+                [(ngModel)]="newProduct.quantity"
+                placeholder="5"
+                name="quantity"
+                />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="imgLogoUrl" class="form-label">Link do zdjęcia produktu</label>
+                <input
+                type="text"
+                class="form-control shadow-sm"
+                id="imgLogoUrl"
+                required
+                [(ngModel)]="newProduct.imgLogoUrl"
+                placeholder="imgLogoUrl"
+                name="imgLogoUrl"
+                />
+            </div>
+        </div>
+
+
+        <div>
+            <button (click)="addProduct()" class="btn btn-success">Dodaj</button>
+        </div>
+
+
+    </form>
+</div>
+    

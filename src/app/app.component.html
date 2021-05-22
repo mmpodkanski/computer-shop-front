@@ -6,19 +6,27 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/products">Strona główna</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/promotions">Promocje</a>
-        </li>
+        
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Kategorie
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Klawiatury</a></li>
-            <li><a class="dropdown-item" href="#">Myszki</a></li>
-            <li><a class="dropdown-item" href="#">Nowe</a></li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" [routerLink]="['/products']" [queryParams]="{category: 'MOTHERBOARD'}">Płyty główne</a>
+            <a class="dropdown-item" [routerLink]="['/products']" [queryParams]="{category: 'KEYBOARD'}">Klawiatury</a>
+            <a class="dropdown-item" [routerLink]="['/products']" [queryParams]="{category: 'MOUSE'}">Myszki</a>
+            <a class="dropdown-item" [routerLink]="['/products']" [queryParams]="{category: 'MONITOR'}">Monitory</a>
+            <a class="dropdown-item" [routerLink]="['/products']" [queryParams]="{category: 'SSD_DRIVE'}">Dyski SSD</a>
+            <a class="dropdown-item" [routerLink]="['/products']" [queryParams]="{category: 'HDD_DRIVE'}">Dyski HDD</a>
+            <a class="dropdown-item" [routerLink]="['/products']" [queryParams]="{category: 'GPU'}">GPU</a>
+            <a class="dropdown-item" [routerLink]="['/products']" [queryParams]="{category: 'CPU'}">CPU</a>
+            <a class="dropdown-item" [routerLink]="['/products']" [queryParams]="{category: 'RAM'}">Ram</a>
+          </div>
+        </li>
+
+        <li *ngIf="showAdminBoard" class="nav-item">
+          <a class="nav-link" href="/admin/add-product">Dodaj produkt</a>
         </li>
 
       </ul>
@@ -48,9 +56,7 @@
     <nav class="navbar-expand-sm bg-dark" *ngIf="isLoggedIn">
 
       <form class="container-fluid justify-content-start">
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <a class="nav-link active" routerLink="profile">{{ username }}</a>
-        </div>
+        <a class="nav-link active"href="/customer"><b>{{ username }}</b></a>
       </form>
     </nav>
 
@@ -75,7 +81,7 @@
 </body>
 
 <footer class="footer text-center">
-  <p style="color: white;">Created by: mmpodkanski</p>
+  <p style="color: white;"></p>
   <p>
     <a href="https://github.com/mmpodkanski" target="_blank" >Github</a>
   </p>
